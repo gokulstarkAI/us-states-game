@@ -22,13 +22,9 @@ while len(answer_lst) < 50:
                                     prompt="what's another state name?").title()
     for _ in states:
         if answer_state == "Exit":
-            missed_states = []
-            for state in states:
-                if state not in answer_lst:
-                    missed_states.append(state)
-            # print(missed_states)
+            missing_states = [missing for missing in states if missing not in answer_lst]
             missed_states_dict = {
-                "Missed States": missed_states
+                "Missed States": missing_states
             }
             missed_states_data = pd.DataFrame(missed_states_dict)
             missed_states_data.to_csv("states_to_learn.csv")
